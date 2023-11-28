@@ -1,4 +1,5 @@
-Fyyur
+# Fyyur
+
 -----
 
 ## Introduction
@@ -7,39 +8,40 @@ Fyyur is a musical venue and artist booking site that facilitates the discovery 
 
 Your job is to build out the data models to power the API endpoints for the Fyyur site by connecting to a PostgreSQL database for storing, querying, and creating information about artists and venues on Fyyur.
 
-## Overview
-
-This app is nearly complete. It is only missing one thing… real data! While the views and controllers are defined in this application, it is missing models and model interactions to be able to store retrieve, and update data from a database. By the end of this project, you should have a fully functioning site that is at least capable of doing the following, if not more, using a PostgreSQL database:
-
-* creating new venues, artists, and creating new shows.
-* searching for venues and artists.
-* learning more about a specific artist or venue.
-
-We want Fyyur to be the next new platform that artists and musical venues can use to find each other, and discover new music shows. Let's make that happen!
-
 ## Quick Start
 
-* pip install -r requirements.txt
-* dbcreate -U postgres fyyur
-* flask db upgrade
+```bash
+source fyyur_venv/bin/activate
+pip install -r requirements.txt
+dbcreate -U postgres fyyur
+flask db upgrade
+export FLASK_APP=myapp
+export FLASK_ENV=development # enables debug mode
+python3 app.py
+```
 
 ## Tech Stack (Dependencies)
 
 ### 1. Backend Dependencies
+
 Our tech stack will include the following:
- * **virtualenv** as a tool to create isolated Python environments
- * **SQLAlchemy ORM** to be our ORM library of choice
- * **PostgreSQL** as our database of choice
- * **Python3** and **Flask** as our server language and server framework
- * **Flask-Migrate** for creating and running schema migrations
+
+* **virtualenv** as a tool to create isolated Python environments
+* **SQLAlchemy ORM** to be our ORM library of choice
+* **PostgreSQL** as our database of choice
+* **Python3** and **Flask** as our server language and server framework
+* **Flask-Migrate** for creating and running schema migrations
+
 You can download and install the dependencies mentioned above using `pip` as:
-```
+
+```bash
 pip install virtualenv
 pip install SQLAlchemy
 pip install postgres
 pip install Flask
 pip install Flask-Migrate
 ```
+
 > **Note** - If we do not mention the specific version of a package, then the default latest stable package will be installed. 
 
 ### 2. Frontend Dependencies
@@ -93,25 +95,12 @@ Highlight folders:
 * Models in `app.py` -- (Missing functionality.) Defines the data models that set up the database tables.
 * `config.py` -- (Missing functionality.) Stores configuration variables and instructions, separate from the main application code. This is where you will need to connect to the database.
 
-
-Instructions
------
-
-1. Understand the Project Structure (explained above) and where important files are located.
-2. Build and run local development following the Development Setup steps below.
-3. Fill in the missing functionality in this application: this application currently pulls in fake data, and needs to now connect to a real database and talk to a real backend.
-4. Fill out every `TODO` section throughout the codebase. We suggest going in order of the following:
-    * Connect to a database in `config.py`. A project submission that uses a local database connection is fine.
-    * Using SQLAlchemy, set up normalized models for the objects we support in our web app in the Models section of `app.py`. Check out the sample pages provided at /artists/1, /venues/1, and /shows for examples of the data we want to model, using all of the learned best practices in database schema design. Implement missing model properties and relationships using database migrations via Flask-Migrate.
-    * Implement form submissions for creating new Venues, Artists, and Shows. There should be proper constraints, powering the `/create` endpoints that serve the create form templates, to avoid duplicate or nonsensical form submissions. Submitting a form should create proper new records in the database.
-    * Implement the controllers for listing venues, artists, and shows. Note the structure of the mock data used. We want to keep the structure of the mock data.
-    * Implement search, powering the `/search` endpoints that serve the application's search functionalities.
-    * Serve venue and artist detail pages, powering the `<venue|artist>/<id>` endpoints that power the detail pages.
-
 #### Data Handling with `Flask-WTF` Forms
+
 The starter codes use an interactive form builder library called [Flask-WTF](https://flask-wtf.readthedocs.io/). This library provides useful functionality, such as form validation and error handling. You can peruse the Show, Venue, and Artist form builders in `forms.py` file. The WTForms are instantiated in the `app.py` file. For example, in the `create_shows()` function, the Show form is instantiated from the command: `form = ShowForm()`. To manage the request from Flask-WTF form, each field from the form has a `data` attribute containing the value from user input. For example, to handle the `venue_id` data from the Venue form, you can use: `show = Show(venue_id=form.venue_id.data)`, instead of using `request.form['venue_id']`.
 
 Acceptance Criteria
+
 -----
 
 1. The web app should be successfully connected to a PostgreSQL database. A local connection to a database on your local computer is fine.
@@ -134,51 +123,60 @@ Acceptance Criteria
 
 Looking to go above and beyond? This is the right section for you! Here are some challenges to make your submission stand out:
 
-*  Implement artist availability. An artist can list available times that they can be booked. Restrict venues from being able to create shows with artists during a show time that is outside of their availability.
+* Implement artist availability. An artist can list available times that they can be booked. Restrict venues from being able to create shows with artists during a show time that is outside of their availability.
 * Show Recent Listed Artists and Recently Listed Venues on the homepage, returning results for Artists and Venues sorting by newly created. Limit to the 10 most recently listed items.
 * Implement Search Artists by City and State, and Search Venues by City and State. Searching by "San Francisco, CA" should return all artists or venues in San Francisco, CA.
 
 Best of luck in your final project! Fyyur depends on you!
 
-
 ## Development Setup
+
 1. **Download the project starter code locally**
-```
+
+```bash
 git clone https://github.com/udacity/FSND.git
 cd FSND/projects/01_fyyur/starter_code 
 ```
 
 2. **Create an empty repository in your Github account online. To change the remote repository path in your local repository, use the commands below:**
-```
+
+```bash
 git remote -v 
 git remote remove origin 
 git remote add origin <https://github.com/<USERNAME>/<REPO_NAME>.git>
 git branch -M master
 ```
+
 Once you have finished editing your code, you can push the local repository to your Github account using the following commands.
-```
+
+```bash
 git add . --all   
 git commit -m "your comment"
 git push -u origin master
 ```
 
 3. **Initialize and activate a virtualenv using:**
-```
+
+```bash
 python -m virtualenv env
 source env/bin/activate
 ```
+
 >**Note** - In Windows, the `env` does not have a `bin` directory. Therefore, you'd use the analogous command shown below:
-```
+
+```bash
 source env/Scripts/activate
 ```
 
 4. **Install the dependencies:**
-```
+
+```bash
 pip install -r requirements.txt
 ```
 
 5. **Run the development server:**
-```
+
+```bash
 export FLASK_APP=myapp
 export FLASK_ENV=development # enables debug mode
 python3 app.py
@@ -188,6 +186,7 @@ python3 app.py
 Navigate to project homepage [http://127.0.0.1:5000/](http://127.0.0.1:5000/) or [http://localhost:5000](http://localhost:5000) 
 
 ## Troubleshooting:
+
 - If you encounter any dependency errors, please ensure that you are using Python 3.9 or lower.
 - If you are still facing the dependency errors, follow the given commands:
   - `using pip install --upgrade flask-moment`

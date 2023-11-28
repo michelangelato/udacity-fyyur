@@ -1,7 +1,9 @@
-{% extends 'layouts/main.html' %} {% block title %}Fyyur | Shows{% endblock %}
-{% block content %}
+{% extends 'layouts/main.html' %} {% block title %}Show Search{% endblock %} {%
+block content %}
+
+<h3>Number of search results for "{{ search_term }}": {{ results.count }}</h3>
 <div class="row shows">
-	{%for show in shows %}
+	{% for show in results.data %}
 	<div class="col-sm-4">
 		<div class="tile tile-show">
 			<img src="{{ show.artist_image_link }}" alt="Artist Image" />
@@ -14,5 +16,6 @@
 		</div>
 	</div>
 	{% endfor %}
-</div>
+</ul>
+
 {% endblock %}
